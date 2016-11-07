@@ -1,19 +1,26 @@
 # Dockerfile to create a docker image
-# Base image
-FROM tomcat:8.0
 
-# Add war package to the image
-RUN mkdir /app
-ADD hello/. /app
+FROM  index.tenxcloud.com/docker_library/node:4.4.2
 
-ADD start.sh /start.sh
 
-RUN chmod +x /start.sh
+
+# Add files to the image
+
+RUN mkdir -p /opt/nodejs
+
+ADD . /opt/nodejs
+
+WORKDIR /opt/nodejs
+
+
 
 # Expose the container port
-EXPOSE 8080
 
-CMD ["/start.sh"]
+EXPOSE 5000
+
+
+
+ENTRYPOINT ["node", "index.js"]
 
 
 
