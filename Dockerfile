@@ -1,23 +1,18 @@
 # Dockerfile to create a docker image
+FROM debian:jessie
 
-FROM  index.tenxcloud.com/docker_library/node:4.4.2
-
-
-
-# Add files to the image
-
-RUN mkdir -p /opt/nodejs
-
-ADD . /opt/nodejs
-
-WORKDIR /opt/nodejs
+MAINTAINER Jessica Frazelle <jess@docker.com>
 
 
 
-# Expose the container port
+RUN apt-get update && apt-get install -y \
 
-EXPOSE 5000
+	debootstrap \
+
+	--no-install-recommends \
+
+	&& rm -rf /var/lib/apt/lists/*
 
 
 
-ENTRYPOINT ["node", "index.js"]
+ENTRYPOINT [ "bootstrap" ]
