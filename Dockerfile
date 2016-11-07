@@ -21,6 +21,3 @@ EXPOSE 5000
 
 
 ENTRYPOINT ["node", "index.js"]
-
-
-
